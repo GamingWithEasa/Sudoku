@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Sudoku Game</h1>
+    
+    <!-- Difficulty Tabs -->
+    <div class="tabs">
+      <div class="tab-list">
+        <button class="tab active" data-difficulty="easy">Easy</button>
+        <button class="tab" data-difficulty="medium">Medium</button>
+        <button class="tab" data-difficulty="hard">Hard</button>
+      </div>
+    </div>
+    
+    <!-- Game Info Row -->
+    <div class="game-info">
+      <div class="timer">
+        <div class="timer-display">00:00</div>
+        <button class="timer-toggle" aria-label="Pause timer">
+          <i class="fas fa-pause"></i>
+        </button>
+      </div>
+      
+      <div class="mistakes-counter">
+        <i class="fas fa-times-circle"></i>
+        <span>0</span>
+      </div>
+    </div>
+    
+    <!-- Game Status Alerts -->
+    <div class="alerts">
+      <div class="alert loading-alert hidden">
+        <div class="spinner"></div>
+        <span>Generating puzzle...</span>
+      </div>
+      
+      <div class="alert error-alert hidden">
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="error-message"></span>
+      </div>
+      
+      <div class="alert success-alert hidden">
+        <i class="fas fa-check"></i>
+        <span class="success-message"></span>
+      </div>
+      
+      <div class="alert conflict-alert hidden">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>There are some conflicts in your solution.</span>
+      </div>
+    </div>
+    
+    <!-- Sudoku Board -->
+    <div class="sudoku-board"></div>
+    
+    <!-- Number Controls -->
+    <div class="number-controls"></div>
+    
+    <!-- Game Controls -->
+    <div class="game-controls">
+      <button class="control-btn reset-btn">
+        <i class="fas fa-sync-alt"></i> Reset
+      </button>
+      <button class="control-btn undo-btn" disabled>
+        <i class="fas fa-undo"></i> Undo
+      </button>
+      <button class="control-btn hint-btn">
+        <i class="fas fa-lightbulb"></i> Hint <span class="hint-count hidden">(0)</span>
+      </button>
+      <button class="control-btn new-game-btn">
+        New Game
+      </button>
+    </div>
+    
+    <!-- Stats Button -->
+    <div class="stats-container">
+      <button class="stats-btn">
+        <i class="fas fa-chart-bar"></i>
+      </button>
+    </div>
+    
+    <!-- Stats Modal -->
+    <div class="modal stats-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Game Statistics</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="stats-tabs">
+            <div class="stats-tab-list">
+              <button class="stats-tab active" data-tab="stats">Statistics</button>
+              <button class="stats-tab" data-tab="leaderboard">Best Times</button>
+            </div>
+            
+            <div class="stats-tab-content stats-panel active">
+              <div class="difficulty-tabs">
+                <button class="difficulty-tab active" data-difficulty="easy">Easy</button>
+                <button class="difficulty-tab" data-difficulty="medium">Medium</button>
+                <button class="difficulty-tab" data-difficulty="hard">Hard</button>
+              </div>
+              
+              <div class="stats-grid">
+                <!-- Stats will be populated by JavaScript -->
+              </div>
+              
+              <button class="reset-stats-btn">Reset Statistics</button>
+            </div>
+            
+            <div class="stats-tab-content leaderboard-panel">
+              <div class="difficulty-tabs">
+                <button class="difficulty-tab active" data-difficulty="easy">Easy</button>
+                <button class="difficulty-tab" data-difficulty="medium">Medium</button>
+                <button class="difficulty-tab" data-difficulty="hard">Hard</button>
+              </div>
+              
+              <div class="leaderboard-list">
+                <!-- Leaderboard will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle">
+      <i class="fas fa-sun light-icon"></i>
+      <i class="fas fa-moon dark-icon"></i>
+    </button>
+    
+    <!-- Instructions -->
+    <div class="instructions">
+      <p>Use keyboard numbers 1-9 to input values</p>
+      <p>Use arrow keys to navigate between cells</p>
+      <p>Press Ctrl+Z to undo your last move</p>
+    </div>
+  </main>
+  
+  <!-- Canvas for confetti -->
+  <canvas id="confetti-canvas"></canvas>
+  
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="sudoku-utils.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
